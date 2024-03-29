@@ -15,6 +15,10 @@ zephyr_library_sources_ifdef(CONFIG_MODEM_SOCKET modem_socket.c)
 zephyr_library_include_directories(${ZEPHYR_BASE}/subsys/net/ip)
 zephyr_library_include_directories(${ZEPHYR_BASE}/subsys/net/lib/sockets)
 
+if(CONFIG_MODEM_UBLOX_LARA)
+	zephyr_library_sources(ublox-lara-r6.c)
+endif()
+
 if(CONFIG_MODEM_UBLOX_SARA)
 	zephyr_library_sources(ublox-sara-r4.c)
 endif()
