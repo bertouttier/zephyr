@@ -33,6 +33,9 @@
 #define z_plli2s_r(v) LL_RCC_PLLI2SR_DIV_ ## v
 #define plli2sr(v) z_plli2s_r(v)
 
+#define z_plli2s_q(v) LL_RCC_PLLI2SQ_DIV_ ## v
+#define plli2sq(v) z_plli2s_q(v)
+
 #ifdef __cplusplus
 extern "C" {
 #endif

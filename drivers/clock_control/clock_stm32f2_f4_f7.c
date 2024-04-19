@@ -105,10 +105,17 @@ __unused
 void config_plli2s(void)
 {
 #if DT_HAS_COMPAT_STATUS_OKAY(st_stm32f4_plli2s_clock)
+#if STM32_PLLI2S_Q_ENABLED
+	LL_RCC_PLLI2S_ConfigDomain_48M(get_pll_source(),
+				       plli2sm(STM32_PLLI2S_M_DIVISOR),
+				       STM32_PLLI2S_N_MULTIPLIER,
+				       plli2sq(STM32_PLLI2S_Q_DIVISOR));
+#else
 	LL_RCC_PLLI2S_ConfigDomain_I2S(get_pll_source(),
 				       pllm(STM32_PLLI2S_M_DIVISOR),
 				       STM32_PLLI2S_N_MULTIPLIER,
 				       plli2sr(STM32_PLLI2S_R_DIVISOR));
+#endif
 #elif DT_HAS_COMPAT_STATUS_OKAY(st_stm32f412_plli2s_clock)
 	LL_RCC_PLL_ConfigDomain_I2S(get_pll_source(),
 				       plli2sm(STM32_PLLI2S_M_DIVISOR),
