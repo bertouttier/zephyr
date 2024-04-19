@@ -189,6 +189,13 @@ static int enabled_clock(uint32_t src_clk)
 		}
 		break;
 #endif /* STM32_SRC_PLLI2S_R */
+#if defined(STM32_SRC_PLLI2S_Q)
+	case STM32_SRC_PLLI2S_Q:
+		if (!IS_ENABLED(STM32_PLLI2S_Q_ENABLED)) {
+			r = -ENOTSUP;
+		}
+		break;
+#endif /* STM32_SRC_PLLI2S_Q */
 	default:
 		return -ENOTSUP;
 	}
@@ -387,6 +394,14 @@ static int stm32_clock_control_get_subsys_rate(const struct device *clock,
 					      STM32_PLLI2S_R_DIVISOR);
 		break;
 #endif /* STM32_SRC_PLLI2S_R */
+#if defined(STM32_SRC_PLLI2S_Q) & STM32_PLLI2S_ENABLED
+	case STM32_SRC_PLLI2S_Q:
+		*rate = get_pll_div_frequency(get_pllsrc_frequency(),
+					      STM32_PLLI2S_M_DIVISOR,
+					      STM32_PLLI2S_N_MULTIPLIER,
+					      STM32_PLLI2S_Q_DIVISOR);
+		break;
+#endif /* STM32_SRC_PLLI2S_Q */
 /* PLLSAI1x not supported yet */
 /* PLLSAI2x not supported yet */
 #if defined(STM32_SRC_LSE)

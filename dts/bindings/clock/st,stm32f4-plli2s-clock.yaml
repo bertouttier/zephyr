@@ -40,3 +40,9 @@ properties:
       - 5
       - 6
       - 7
+
+  div-q:
+    type: int
+    description: |
+        PLLI2S division factor for USB OTG FS and SDIO generator clocks.
+        Valid range: 2 - 15
